@@ -9,6 +9,10 @@
 ## Subindo um ambiente via Docker (Opcional)
 Caso não possua uma instância local para teste instalada, utilize o comando abaixo para iniciar um container do IRIS Community:
 
+```bash
+docker run --name my-iris -d --publish 1972:1972 --publish 52773:52773 intersystems/iris-community:latest-cd
+```
+
 # Configurando ambiente
 1. Arquivo de Configuração: Renomeie o arquivo .vscode/settings.example.json para .vscode/settings.json.
 2. Conexão: Ajuste o campo objectscript.conn de acordo com as credenciais do seu servidor ou instância.
