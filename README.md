@@ -29,16 +29,14 @@ Exemplo de configuração no arquivo settings.json:
 # Como funciona a sincronização?
 A extensão ObjectScript permite a sincronização direta com o servidor configurado no arquivo de preferências (.vscode/settings.json). Isso abrange os códigos-fonte armazenados no banco de dados (cache.dat/iris.dat).
 
-Estrutura de Pastas e Mapeamento
+## Estrutura de Pastas e Mapeamento
 O mapeamento segue a convenção e a hierarquia de nomes da plataforma:
 
-src/: Considerada a raiz para códigos-fonte (.cls, .int, .mac).
+- src/: Considerada a raiz para códigos-fonte (.cls, .int, .mac).
+    - Exemplo: Se houver uma classe ``Teste.Chamada.cls`` no servidor, ela deve estar localizada em ``src/Teste/Chamada.cls`` neste repositório.
 
-Exemplo: Se houver uma classe Teste.Chamada.cls no servidor, ela deve estar localizada em src/Teste/Chamada.cls neste repositório.
-
-csp/: Pasta configurada para a sessão Web do namespace.
-
-Nota: Se o seu namespace define que os arquivos CSP ficam em /home/meu/csp/, você precisará replicar essa estrutura dentro desta pasta.
+- csp/: Pasta configurada para a sessão Web do namespace.
+    - Nota: Se o seu namespace define que os arquivos CSP ficam em /home/meu/csp/, você precisará replicar essa estrutura dentro desta pasta.
 
 A sincronização é realizada automaticamente assim que o arquivo é salvo no editor.
 
