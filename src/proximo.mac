@@ -1,0 +1,6 @@
+ROUTINE proximo
+#;
+
+rotina
+    write "Arquivos .mac são legados, porém não é tanto. São sucessores do .int",!
+    quit
