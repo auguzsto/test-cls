@@ -11,9 +11,7 @@ ClassMethod Executar() As %Status
 /// deve haver, até então, um servidor de desenvolvimento.
 ClassMethod NovoRecurso() As %Status
 {
-    Set sc = $$$OK
-    // do something
-    Return sc
+   return $$$OK
 }
 
 ClassMethod MaisUmNovoRecurso() As %Status
