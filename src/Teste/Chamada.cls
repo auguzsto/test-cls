@@ -16,4 +16,11 @@ ClassMethod NovoRecurso() As %Status
     Return sc
 }
 
+ClassMethod MaisUmNovoRecurso() As %Status
+{
+    Set sc = $$$OK
+    // do something
+    Return sc
+}
+
 }
