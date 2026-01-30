@@ -32,4 +32,10 @@ ClassMethod TestandoDeployAPI() As %Status
     Return sc
 }
 
+ClassMethod Deploy() As %Status
+{
+    Set sc = $$$OK
+    Return sc
+}
+
 }
