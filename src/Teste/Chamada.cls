@@ -20,7 +20,6 @@ ClassMethod MaisUmNovoRecurso() As %Status
     Return sc
 }
 
-/// Description
 ClassMethod TestandoCapturaNoCI() As %Status
 {
     Set sc = $$$OK
