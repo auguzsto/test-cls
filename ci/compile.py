@@ -40,7 +40,7 @@ def isExtencaoPermitida(filename):
 
 def compilarCodigoFonte(filename, conteudo):
     body = {
-        "namespace": "USER",
+        "namespace": "AGM",
         "source": filename,
         "content": conteudo
     }
