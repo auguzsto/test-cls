@@ -26,7 +26,6 @@ ClassMethod TestandoCapturaNoCI() As %Status
     Return sc
 }
 
-/// Visto no trigger.
 ClassMethod TestandoDeployAPI() As %Status
 {
     Set sc = $$$OK
