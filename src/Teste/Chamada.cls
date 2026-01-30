@@ -26,4 +26,10 @@ ClassMethod TestandoCapturaNoCI() As %Status
     Return sc
 }
 
+ClassMethod TestandoDeployAPI() As %Status
+{
+    Set sc = $$$OK
+    Return sc
+}
+
 }
