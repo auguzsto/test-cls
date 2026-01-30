@@ -1,5 +1,5 @@
 ROUTINE legado [Type=INT]
 
 rotina
-    write "Isto é uma rotina legado!",!
+    write "Isto é uma rotina legado!!",!
     quit
