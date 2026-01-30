@@ -17,7 +17,6 @@ ClassMethod NovoRecurso() As %Status
 ClassMethod MaisUmNovoRecurso() As %Status
 {
     Set sc = $$$OK
-    // do something
     Return sc
 }
 
@@ -25,7 +24,6 @@ ClassMethod MaisUmNovoRecurso() As %Status
 ClassMethod TestandoCapturaNoCI() As %Status
 {
     Set sc = $$$OK
-    // do something
     Return sc
 }
 
