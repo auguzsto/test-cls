@@ -1,1 +1,2 @@
-console.log("Hello via Bun!");
+const CHANGES_FILES = process.env.CHANGES_FILES
+console.log(CHANGES_FILES)
