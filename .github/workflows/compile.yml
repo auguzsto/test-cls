@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12.3"
+          cache: 'pip'
       - name: Criar lista de arquivos alterados.
         id: changed-files
         run: |
@@ -41,4 +42,5 @@ jobs:
           CHANGED_FILES: "${{ steps.changed-files.outputs.changed_files_list }}"
           BASE_API_COMPILAR: "${{env.BASE_API_COMPILAR }}"
         run: |
+          pip install -r requirements.txt --break-system-packages
           python3 compile.py
