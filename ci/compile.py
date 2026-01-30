@@ -19,13 +19,13 @@ def extrairConteudoArquivoAlterado():
                 continue
             while linha := file.readline():
                 conteudo.append(linha.rstrip("\n"))
-
+        compilarCodigoFonte(filename, conteudo)
     #conteudoSerializado = json.dumps(conteudo, ensure_ascii=False, indent=2)
 
     # Futuramento esse conteúdo será enviado para um API para realizar o deploy
     # no servidor.
     #print(conteudoSerializado)
-    compilarCodigoFonte(filename, conteudo)
+    #compilarCodigoFonte(filename, conteudo)
 
 def isExtencaoPermitida(filename):
     permitidas = [".cls", ".mac", ".csp", ".int"]
