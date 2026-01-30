@@ -5,7 +5,7 @@ on:
     branches:
       - master
   push:
-    branches: master
+    branches: [master]
 
 jobs:
   build:
@@ -17,28 +17,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-            fetch-depth: 0
-        
-      - uses: oven-sh/setup-bun@v2
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
         with:
-          bun-version: 1.3.5
+          python-version: '3.12.3'
       - name: Lista arquivos alterados.
         id: changed-files
         run: |
-            REPO_ROOT=$(git rev-parse --show-toplevel)
-            # List files changed in the last commit compared to its parent (HEAD^1)
-            # and prepend the absolute path.
-            CHANGED_FILES=$(git diff --name-only HEAD^1 HEAD | sed "s|^|$REPO_ROOT/|")
+          REPO_ROOT=$(git rev-parse --show-toplevel)
+          # List files changed in the last commit compared to its parent (HEAD^1)
+          # and prepend the absolute path.
+          CHANGED_FILES=$(git diff --name-only HEAD^1 HEAD | sed "s|^|$REPO_ROOT/|")
 
-            # Export the list as a step output (useful for subsequent steps)
-            echo "changed_files_list<<EOF" >> $GITHUB_OUTPUT
-            echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT    
+          # Export the list as a step output (useful for subsequent steps)
+          echo "changed_files_list<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Compile
         env:
           CHANGED_FILES: "${{ steps.changed-files.outputs.changed_files_list }}"
         run: |
-            bun install
-            bun index.ts
+          python3 compile.py
