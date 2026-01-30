@@ -14,18 +14,24 @@ for (const filename of ARRAY_CHANGED_FILES) {
         continue
     }
 
-    const content = returnContentInArray(filename);
+    const content = await returnContentInArray(filename);
     console.log(content)
 }
 
-function returnContentInArray(filename: string): Array<string> {
-    const result: Array<string> = [];
+async function returnContentInArray(filename: string): Promise<Array<string>> {
+    const temp: Array<string> = [];
     const stream = fs.createReadStream(filename);
     const read = readline.createInterface({input: stream, crlfDelay: Infinity});
 
-    read.on('line', (line) => {
-        result.push(line)
-    });
+    let result = new Promise((resolve) => {
+        read.on('line', (line) => {
+            temp.push(line)
+        });
 
-    return result;
+        read.on("close", () => {
+            resolve(temp)
+        })
+    })
+
+    return await result as Array<string>;
 }
