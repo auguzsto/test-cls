@@ -1,0 +1,22 @@
+name: compile
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+       my-iris:
+        image: oven/bun:1.3.5 
+        env:
+          ENV_ARQUIVOS_ALTERADOS: TESTE
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: |
+            bun install
+            bun index.ts
