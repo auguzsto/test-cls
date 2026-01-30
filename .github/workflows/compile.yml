@@ -21,7 +21,7 @@ jobs:
         with:
           bun-version: 1.3.5
       - name: Lista arquivos alterados.
-        id: change-files
+        id: changed-files
         run: |
             REPO_ROOT=$(git rev-parse --show-toplevel)
             # List files changed in the last commit compared to its parent (HEAD^1)
@@ -36,7 +36,7 @@ jobs:
 
       - name: Compile
         env:
-          CHANGES_FILES: "${{ steps.change-files.outputs.changed_files_list }}"
+          CHANGED_FILES: "${{ steps.changed-files.outputs.changed_files_list }}"
         run: |
             bun install
             bun index.ts

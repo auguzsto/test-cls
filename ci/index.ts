@@ -1,2 +1,4 @@
-const CHANGES_FILES = process.env.CHANGES_FILES
-console.log(CHANGES_FILES)
+const CHANGED_FILES = process.env.CHANGED_FILES!
+const ARRAY_CHANGED_FILES = CHANGED_FILES.split("\n")
+
+console.log(ARRAY_CHANGED_FILES)
