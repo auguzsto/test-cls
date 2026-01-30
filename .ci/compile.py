@@ -5,6 +5,7 @@ import sys
 
 BASE_API_COMPILAR = os.environ["BASE_API_COMPILAR"]
 ARQUIVOS_ALTERADOS = os.environ["CHANGED_FILES"]
+NAMESPACE = os.environ["NAMESPACE"]
 ARRAY_ARQUIVOS_ALTERADOS = ARQUIVOS_ALTERADOS.split("\n")
 
 def main():
@@ -21,12 +22,6 @@ def extrairConteudoArquivoAlterado():
                 conteudo.append(linha.rstrip("\n"))
         
         compilarCodigoFonte(filename, conteudo)
-    #conteudoSerializado = json.dumps(conteudo, ensure_ascii=False, indent=2)
-
-    # Futuramento esse conteúdo será enviado para um API para realizar o deploy
-    # no servidor.
-    #print(conteudoSerializado)
-    #compilarCodigoFonte(filename, conteudo)
 
 def isExtencaoPermitida(filename):
     permitidas = [".cls", ".mac", ".csp", ".int"]
@@ -40,7 +35,7 @@ def isExtencaoPermitida(filename):
 
 def compilarCodigoFonte(filename, conteudo):
     body = {
-        "namespace": "AGM",
+        "namespace": NAMESPACE,
         "source": filename,
         "content": conteudo
     }
