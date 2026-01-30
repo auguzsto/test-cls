@@ -12,13 +12,14 @@ def main():
 
 def extrairConteudoArquivoAlterado():
     for filename in ARRAY_ARQUIVOS_ALTERADOS:
+        if not isExtencaoPermitida(filename):
+            continue
+
         conteudo = []
-        
         with open(filename, "r", encoding="utf-8") as file:
-            if not isExtencaoPermitida(filename):
-                continue
             while linha := file.readline():
                 conteudo.append(linha.rstrip("\n"))
+        
         compilarCodigoFonte(filename, conteudo)
     #conteudoSerializado = json.dumps(conteudo, ensure_ascii=False, indent=2)
 
