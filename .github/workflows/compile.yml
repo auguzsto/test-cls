@@ -40,7 +40,7 @@ jobs:
       - name: Enviando arquivos alterados para compilação
         env:
           CHANGED_FILES: "${{ steps.changed-files.outputs.changed_files_list }}"
-          BASE_API_COMPILAR: "${{secrets.BASE_API_COMPILAR }}"
+          BASE_API_CI: "${{secrets.BASE_API_CI }}"
           NAMESPACE: "${{secrets.NAMESPACE }}"
         run: |
           python3 compile.py

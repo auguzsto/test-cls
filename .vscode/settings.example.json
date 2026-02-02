@@ -10,7 +10,7 @@
         "password": "PASSWORD",
         "active": true
     },
-    "objectscript.syncLocalChanges": "vscodeOnly",
+    "objectscript.syncLocalChanges": "all",
     "objectscript.compileFlags": "cuk /checkuptodate=expandedonly",
     "objectscript.export": {
         "folder": "src",
