@@ -45,7 +45,6 @@ ClassMethod DeployComCamadaDeSeguranca() As %Status
     Return sc
 }
 
-/// Deploy
 ClassMethod DeployEnvinadoTipoExtencaoConfigoFonte() As %Status
 {
     Set sc = $$$OK

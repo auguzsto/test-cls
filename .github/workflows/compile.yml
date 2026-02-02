@@ -1,7 +1,7 @@
 name: compile
 on:
   push:
-    branches: [master]
+    branches: [master, staging]
 
 jobs:
   build:
@@ -19,8 +19,16 @@ jobs:
         with:
           python-version: "3.12.3"
           cache: "pip"
+
+      - name: Extrair o nome da branch
+        id: extract_branch
+        shell: bash
+        run: |
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
       - name: Criar lista de arquivos alterados.
         id: changed-files
+        shell: bash
         run: |
           REPO_ROOT=$(git rev-parse --show-toplevel)
           # List files changed in the last commit compared to its parent (HEAD^1)
@@ -31,7 +39,6 @@ jobs:
           echo "changed_files_list<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-        shell: bash
 
       - name: Instalando dependências
         run: |
@@ -40,8 +47,10 @@ jobs:
       - name: Enviando arquivos alterados para compilação
         env:
           CHANGED_FILES: "${{ steps.changed-files.outputs.changed_files_list }}"
+          BRANCH: "${{ steps.extract_branch.outputs.branch }}"
           X_SECRET: "${{ secrets.X_SECRET }}"
-          BASE_API_CI: "${{ secrets.BASE_API_CI }}"
+          BASE_API_CI_PROD: "${{ secrets.BASE_API_CI_PROD }}"
+          BASE_API_CI_STAGING: "${{ secrets.BASE_API_CI_STAGING }}"
           NAMESPACE: "${{ secrets.NAMESPACE }}"
         run: |
           python3 compile.py

@@ -3,12 +3,18 @@ import json
 import requests
 import sys
 
-
+BRANCH = os.environ["BRANCH"]
 X_SECRET = os.environ["X_SECRET"]
-BASE_API_CI = os.environ["BASE_API_CI"]
+BASE_API_CI = os.environ["BASE_API_CI_STAGING"] # Padrão é homologação.
 ARQUIVOS_ALTERADOS = os.environ["CHANGED_FILES"]
 NAMESPACE = os.environ["NAMESPACE"]
 ARRAY_ARQUIVOS_ALTERADOS = ARQUIVOS_ALTERADOS.split("\n")
+
+if BRANCH == "staging":
+    BASE_API_CI = os.environ["BASE_API_CI_STAGING"]
+
+if BRANCH == "master":
+    BASE_API_CI = os.environ["BASE_API_CI_PROD"]
 
 def main():
     extrairConteudoArquivoAlterado()
