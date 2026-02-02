@@ -39,4 +39,10 @@ ClassMethod Deploy() As %Status
     Return sc
 }
 
+ClassMethod DeployComCamadaDeSeguranca() As %Status
+{
+    Set sc = $$$OK
+    Return sc
+}
+
 }
