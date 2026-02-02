@@ -46,7 +46,7 @@ def deletarCodigoFonte(filename):
         "source": filename
     }
 
-    request = requests.delete(BASE_API_CI + "/deletar", json=body, headers="X-Secret="+X_SECRET)
+    request = requests.delete(BASE_API_CI + "/deletar", json=body, headers={"X-Secret": X_SECRET})
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
@@ -58,7 +58,7 @@ def compilarCodigoFonte(filename, conteudo):
         "content": conteudo
     }
 
-    request = requests.post(BASE_API_CI + "/compilar", json=body, headers="X-Secret="+X_SECRET)
+    request = requests.post(BASE_API_CI + "/compilar", json=body, headers={"X-Secret": X_SECRET})
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
