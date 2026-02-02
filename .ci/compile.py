@@ -3,7 +3,7 @@ import json
 import requests
 import sys
 
-BASE_API_COMPILAR = os.environ["BASE_API_COMPILAR"]
+BASE_API_CI = os.environ["BASE_API_CI"]
 ARQUIVOS_ALTERADOS = os.environ["CHANGED_FILES"]
 NAMESPACE = os.environ["NAMESPACE"]
 ARRAY_ARQUIVOS_ALTERADOS = ARQUIVOS_ALTERADOS.split("\n")
@@ -14,6 +14,11 @@ def main():
 def extrairConteudoArquivoAlterado():
     for filename in ARRAY_ARQUIVOS_ALTERADOS:
         if not isExtencaoPermitida(filename):
+            continue
+        
+        isFoiDeletado = (os.path.exists(filename) == False)
+        if isFoiDeletado:
+            deletarCodigoFonte(filename)
             continue
 
         conteudo = []
@@ -33,6 +38,17 @@ def isExtencaoPermitida(filename):
         
     return False
 
+def deletarCodigoFonte(filename):
+    body = {
+        "namespace": NAMESPACE,
+        "source": filename
+    }
+
+    request = requests.delete(BASE_API_CI + "/deletar", json=body)
+    if request.status_code != 200:
+        print(request.text)
+        sys.exit(0)
+
 def compilarCodigoFonte(filename, conteudo):
     body = {
         "namespace": NAMESPACE,
@@ -40,7 +56,7 @@ def compilarCodigoFonte(filename, conteudo):
         "content": conteudo
     }
 
-    request = requests.post(BASE_API_COMPILAR, json=body)
+    request = requests.post(BASE_API_CI + "/compilar", json=body)
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
