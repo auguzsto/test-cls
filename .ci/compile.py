@@ -32,7 +32,7 @@ def extrairConteudoArquivoAlterado():
 
 def isExtencaoPermitida(filename):
     permitidas = [".cls", ".mac", ".csp", ".int"]
-    _, extencao = os.path.splitext(filename)
+    _, extencao = extencaoArquivo(filename)
 
     for permitida in permitidas:
         if extencao == permitida:
@@ -43,7 +43,8 @@ def isExtencaoPermitida(filename):
 def deletarCodigoFonte(filename):
     body = {
         "namespace": NAMESPACE,
-        "source": filename
+        "source": filename,
+        "extension": extencaoArquivo(filename)
     }
 
     request = requests.delete(BASE_API_CI + "/deletar", json=body, headers={"X-Secret": X_SECRET})
@@ -55,12 +56,17 @@ def compilarCodigoFonte(filename, conteudo):
     body = {
         "namespace": NAMESPACE,
         "source": filename,
-        "content": conteudo
+        "content": conteudo,
+        "extension": extencaoArquivo(filename)
     }
 
     request = requests.post(BASE_API_CI + "/compilar", json=body, headers={"X-Secret": X_SECRET})
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
+
+def extencaoArquivo(filename):
+    _, extencao = os.path.splitext(filename)
+    return extencao
 
 main()
