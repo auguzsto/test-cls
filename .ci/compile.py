@@ -3,6 +3,8 @@ import json
 import requests
 import sys
 
+
+X_SECRET = os.environ["X_SECRET"]
 BASE_API_CI = os.environ["BASE_API_CI"]
 ARQUIVOS_ALTERADOS = os.environ["CHANGED_FILES"]
 NAMESPACE = os.environ["NAMESPACE"]
@@ -44,7 +46,7 @@ def deletarCodigoFonte(filename):
         "source": filename
     }
 
-    request = requests.delete(BASE_API_CI + "/deletar", json=body)
+    request = requests.delete(BASE_API_CI + "/deletar", json=body, headers="X-Secret="+X_SECRET)
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
@@ -56,7 +58,7 @@ def compilarCodigoFonte(filename, conteudo):
         "content": conteudo
     }
 
-    request = requests.post(BASE_API_CI + "/compilar", json=body)
+    request = requests.post(BASE_API_CI + "/compilar", json=body, headers="X-Secret="+X_SECRET)
     if request.status_code != 200:
         print(request.text)
         sys.exit(0)
