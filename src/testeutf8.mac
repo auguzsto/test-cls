@@ -1,0 +1,6 @@
+ROUTINE testeutf8
+#; 
+
+init
+    write "Éáb$$;;;;&&&``~~^çççç[]/\#::::,.''"
+    quit
