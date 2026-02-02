@@ -1,3 +1,4 @@
+/// Classe utilizado para teste de ingração continua.
 Class Teste.Chamada Extends %RegisteredObject
 {
 
