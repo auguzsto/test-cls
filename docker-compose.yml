@@ -1,0 +1,14 @@
+services:
+  my-iris:
+    container_name: my-iris
+    image: intersystems/iris-community:latest-cd
+    volumes:
+      - my-iris-volume:/durable
+    environment:
+      - ISC_DATA_DIRECTORY=/durable/iris
+    ports:
+      - 1972:1972
+      - 52773:52773
+
+volumes:
+  my-iris-volume:
